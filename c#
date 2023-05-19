@@ -1,0 +1,55 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("欢迎来到石头、剪子、布游戏！");
+
+        while (true)
+        {
+            Console.Write("请选择您要出的手势（石头、剪子、布）：");
+            string playerChoice = Console.ReadLine().ToLower();
+
+            if (playerChoice == "石头" || playerChoice == "剪子" || playerChoice == "布")
+            {
+                Random random = new Random();
+                int computerChoice = random.Next(1, 4);
+
+                string[] gestures = { "石头", "剪子", "布" };
+                string computerGesture = gestures[computerChoice - 1];
+
+                Console.WriteLine($"电脑出了 {computerGesture}。");
+
+                if (playerChoice == computerGesture)
+                {
+                    Console.WriteLine("平局！");
+                }
+                else if (
+                    (playerChoice == "石头" && computerGesture == "剪子") ||
+                    (playerChoice == "剪子" && computerGesture == "布") ||
+                    (playerChoice == "布" && computerGesture == "石头")
+                )
+                {
+                    Console.WriteLine("恭喜，您赢了！");
+                }
+                else
+                {
+                    Console.WriteLine("很遗憾，电脑赢了！");
+                }
+
+                Console.Write("是否继续游戏？（是/否）：");
+                string continueChoice = Console.ReadLine().ToLower();
+
+                if (continueChoice != "是")
+                {
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("无效的选择，请重新输入！");
+            }
+        }
+    }
+}
